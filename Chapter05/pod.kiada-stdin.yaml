@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: kiada
-    image: luksa/kiada:0.2
+    image: pvmtriet233/kiada:0.2
     imagePullPolicy: Always
     stdin: true
     ports:
