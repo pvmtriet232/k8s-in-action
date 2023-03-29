@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: kiada
-    image: luksa/kiada:0.1
+    image: pvmtriet233/kiada:0.1
     imagePullPolicy: Always
     ports:
     - containerPort: 8080
