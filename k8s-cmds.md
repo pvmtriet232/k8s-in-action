@@ -36,4 +36,12 @@ k exec -it <pod-name> -c <container-name> -- bash
 
 k attach <pod-name> (-i) 
 
+<!-- Display a pod phase  -->
+k get pod <pod-name> -o yaml | grep phase
+
+<!-- display status.condition and why it is false: -->
+k get po <pod-name> -o json | jq .status.conditions
+
+
+
 
