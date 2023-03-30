@@ -5,12 +5,12 @@ metadata:
 spec:
   initContainers:
   - name: init-demo
-    image: luksa/init-demo:0.1
+    image: pvmtriet233/init-demo:0.1
   - name: network-check
     image: luksa/network-connectivity-checker:0.1
   containers:
   - name: kiada
-    image: luksa/kiada:0.2
+    image: pvmtriet233/kiada:0.2
     stdin: true
     ports:
     - name: http
