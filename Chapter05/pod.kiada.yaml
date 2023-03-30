@@ -9,3 +9,6 @@ spec:
     imagePullPolicy: Always
     ports:
     - containerPort: 8080
+  initContainer:
+  - name: test
+    image: mysql:latest 
