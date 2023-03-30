@@ -39,7 +39,7 @@ k attach <pod-name> (-i)
 <!-- Display a pod phase  -->
 k get pod <pod-name> -o yaml | grep phase
 
-<!-- display status.condition and why it is false: -->
+<!-- display only some field of an object manifest by: -->
 k get po <pod-name> -o json | jq .status.conditions
 
 
