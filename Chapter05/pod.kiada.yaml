@@ -5,10 +5,7 @@ metadata:
 spec:
   containers:
   - name: kiada
-    image: pvmtriet233/kiada:0.1
+    image: luksa/kiada:0.1
     imagePullPolicy: Always
     ports:
     - containerPort: 8080
-  initContainer:
-  - name: test
-    image: mysql:latest 
