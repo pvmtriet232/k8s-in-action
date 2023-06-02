@@ -111,7 +111,7 @@ Like NFS (Network File System) allow you to attach volume in read/write mode on 
 When you add a volume to a pod, you must specify the volume type. A wide range of volume types is available. Here are some of the supported volume types:
 - emptyDir : A simple directory that allows the pod to store data for the duration of its life cycle. The directory is created just before the pod starts and is initially empty - hence the name. 
 - gitRepo : which is now deprecated, is initialized by cloning a Git repository. It's is recommended to use and emptyDir volume and init it using and init conatiner.
--hostPath : Used for mounting files from the worker node's filesystem into pod.
+- hostPath : Used for mounting files from the worker node's filesystem into pod.
 
 
 
