@@ -116,7 +116,11 @@ When you add a volume to a pod, you must specify the volume type. A wide range o
 - gcePersistentDisk (Google Compute Engine Persistent Disk),
 - awsElasticBlockStore (Amazon Web Services Elastic Block Store),
 - azureFile, azureDisk
-- cephfs, cinder, fc, flexVolume
+- cephfs, cinder, fc, flexVolume, flocker, glusterfs, iscsi, portworxVolume, quobyte, rbd, scaleIO, storageos, photonPersistentDisk, vsphereVolume : Used for mounting other types of network storage.
+- configMap, secret, downwardAPI, projected : Special types of volumes used to expose information about the pod and other Kubernetes object through files. Used to configure the application running in the pod. Learn more in Chap 9
+- persistentVolumeClaim : A portable way to integrate external storage into pods. Instead of pointing directly to an external storage volume, this volume type points to a PersistentVolumeClaim object that points to a PersistentVolume object that finally references the actual storage. Learn more in next chapter.
+- csi : a pluggable way of adding storage via the Container Storage Interface. This volume type allows anyone to implement their own storage driver that is the referenced in the csi volume definition. DUsing pod setup, the CSI driver is called to attach the volume to the pod.   
+These volume types serve different purposes. Learn more on next section.
 
 
 
