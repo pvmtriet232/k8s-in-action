@@ -140,9 +140,9 @@ Configuration options for an emptyDir volume:
 
 | Field | Description     |
 | :-------- | :---------- |
-| `name` | name of the volume to mount. Must match one of the volumes defined in the pod | 
+| `name` | `name of the volume to mount. Must match one of the volumes defined in the pod` | 
 | :-------- | :---------- |
-| `mountPath` | the path within the container at which to mount the volume.
+| `mountPath` | `the path within the container at which to mount the volume. |
 | :-------- | :---------- |
 | `readOnly` | Whether to mount the volume ad read-only. Defaults to false. |
 | :-------- | :---------- |
