@@ -140,24 +140,10 @@ Configuration options for an emptyDir volume:
 
 | Field | Description     |
 | :-------- | :---------- |
-| `name` | `name of the volume to mount. Must match one of the volumes defined in the pod` | 
-| :-------- | :---------- |
-| `mountPath` | `the path within the container at which to mount the volume. |
-| :-------- | :---------- |
+| `name` | name of the volume to mount. Must match one of the volumes defined in the pod | 
+| `mountPath` | the path within the container at which to mount the volume. |
 | `readOnly` | Whether to mount the volume ad read-only. Defaults to false. |
-| :-------- | :---------- |
 | `mountPropagation` | Specfifies what should happen if additional filesystem volumes are mounted inside the volume. Defaults to None, which mearns that the container wont reveive any mounts that are mounted by the host, and the host wont receive any mounts that are mounted by the container. `HostTocontainer` means that the container will receive all mounts that are mounted into this volume by the host , but not the other way around. `Bidirectional` means that the container will receive mounts added by the host, and the host will receive mounts by the container |
-
-
-configuration options for a volume mount:  
-- name: name of the volume to mount. Must match one of the volumes defined in the pod.
-- mountPath: the path within the container at which to mount the volume.
-- readOnly: Whether to mount the volume as read-only. Defaults to false.
-- mountPropagation: (I dont understand it but will write anyway) Specifies
-
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
 
 
 
