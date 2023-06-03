@@ -121,6 +121,12 @@ When you add a volume to a pod, you must specify the volume type. A wide range o
 - persistentVolumeClaim : A portable way to integrate external storage into pods. Instead of pointing directly to an external storage volume, this volume type points to a PersistentVolumeClaim object that points to a PersistentVolume object that finally references the actual storage. Learn more in next chapter.
 - csi : a pluggable way of adding storage via the Container Storage Interface. This volume type allows anyone to implement their own storage driver that is the referenced in the csi volume definition. DUsing pod setup, the CSI driver is called to attach the volume to the pod.   
 These volume types serve different purposes. Learn more on next section.
+## 7.2 Using an emptyDir volume
+The simplest volume type is emptyDir. In a pod with two or more containers, an emptyDir volume is used to share data between them.
+## 7.2.1 Persisting files across container restarts
+### Adding an emptyDir volume to a pod
+
+
 
 
 
