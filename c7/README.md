@@ -137,6 +137,7 @@ Configuration options for an emptyDir volume:
 - medium: if left empty, default medium of the host node is used, other option is Memory, virtual memory filesystem where the files are kept in memory instead of on the hard disk.
 - sizeLimit :the total amount of local storage required for the directory, whether on disk or in memory. (e.g : 10Mi)
 ### Mounting the volume to a container
+### Table 7.2 Configure options for a volume mount
 
 | Field | Description     |
 | :-------- | :---------- |
@@ -144,19 +145,11 @@ Configuration options for an emptyDir volume:
 | `mountPath` | the path within the container at which to mount the volume. |
 | `readOnly` | Whether to mount the volume ad read-only. Defaults to false. |
 | `mountPropagation` | Specfifies what should happen if additional filesystem volumes are mounted inside the volume. Defaults to None, which mearns that the container wont reveive any mounts that are mounted by the host, and the host wont receive any mounts that are mounted by the container. `HostTocontainer` means that the container will receive all mounts that are mounted into this volume by the host , but not the other way around. `Bidirectional` means that the container will receive mounts added by the host, and the host will receive mounts by the container |
+| `subPath` | Default to "" which indicates that the entire volumes is to be mounted into the container. When set to a non-empty string , only the specified `subPath` within the volume is mounted into the container.|
+| `subPathExpr` | just like `subPath` but can have environment variable references using the syntax $(ENV_VAR_NAME). Only environment variables that are explicitly defined in the container definition are applicable. Implicit variables such as HOSTNAME will not be resolved. You'll learn how to specify environment variables in chapter 9.|
 
+In most case, you only need `name`, `mountPath`, whether the mount should be `readOnly`.  
+`mountPropagation` option comes to play for advance use-cases where additional mounts are added to the volume's file tree later, either from the host or from the container. The `subPath` and `subPathExpr` options when mounting single volume with multi directories mount to different containers instead of using multiple volumes.  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The `subPathExpr` is used when a volume is shared by multiple pod replicas.
+### Understanding the lifespan of an emptyDir volume
