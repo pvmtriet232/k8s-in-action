@@ -153,3 +153,18 @@ In most case, you only need `name`, `mountPath`, whether the mount should be `re
 
 The `subPathExpr` is used when a volume is shared by multiple pod replicas.
 ### Understanding the lifespan of an emptyDir volume
+- Run pod.quiz.emptydir.yaml
+- Insert question using the shell script `insert-question.sh`
+- Check if the question was inserted to the mongo:
+```bash
+$ k exec -it quiz -c mongo -- mongo kiada --quiet --eval "db.questions.count()"
+```
+- Now, shutdown the server using:
+```bash
+$ k exec -it quiz -c mongo -- mongo admin --eval "db.shutdownserver()"
+```
+- Check the mongo container was restarted
+- After restarting, check that the question still remain in the database:
+```bash
+$ k exec -it quiz -c mongo -- mongo kiada --quiet --eval "db.questions.count()"
+```
