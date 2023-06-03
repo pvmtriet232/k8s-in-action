@@ -155,6 +155,10 @@ configuration options for a volume mount:
 - readOnly: Whether to mount the volume as read-only. Defaults to false.
 - mountPropagation: (I dont understand it but will write anyway) Specifies
 
+| Parameter | Type     | Description                       |
+| :-------- | :------- | :-------------------------------- |
+| `id`      | `string` | **Required**. Id of item to fetch |
+
 
 
 
