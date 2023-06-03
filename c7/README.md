@@ -125,6 +125,35 @@ These volume types serve different purposes. Learn more on next section.
 The simplest volume type is emptyDir. In a pod with two or more containers, an emptyDir volume is used to share data between them.
 ## 7.2.1 Persisting files across container restarts
 ### Adding an emptyDir volume to a pod
+You edit the definition of the quiz pod so that the MongoDb process writes its files to the volume instead of the filesystem of the container it runs in.  
+
+The steps is :  
+- Add emptyDir volume to the pod
+- Mount the volume to the container.  
+### Configure the emptyDir volume
+The emptyDir volume likes other volumes. It come with a few configuration options which is the sub-fields that allow you to configure the volume.  
+
+Configuration options for an emptyDir volume:  
+- medium: if left empty, default medium of the host node is used, other option is Memory, virtual memory filesystem where the files are kept in memory instead of on the hard disk.
+- sizeLimit :the total amount of local storage required for the directory, whether on disk or in memory. (e.g : 10Mi)
+### Mounting the volume to a container
+
+| Field | Description     |
+| :-------- | :------- |
+| `name` | name of the volume to mount. Must match one of the volumes defined in the pod | 
+| :-------- | :------- |
+| `mountPath` | the path within the container at which to mount the volume.
+| :-------- | :------- |
+| `readOnly` | Whether to mount the volume ad read-only. Defaults to false. |
+| :-------- | :------- |
+| `mountPropagation` | Specfifies what should happen if additional filesystem volumes are mounted inside the volume. Defaults to None, which mearns that the container wont reveive any mounts that are mounted by the host, and the host wont receive any mounts that are mounted by the container. `HostTocontainer` means that the container will receive all mounts that are mounted into this volume by the host , but not the other way around. `Bidirectional` means that the container will receive mounts added by the host, and the host will receive mounts by the container |
+
+
+configuration options for a volume mount:  
+- name: name of the volume to mount. Must match one of the volumes defined in the pod.
+- mountPath: the path within the container at which to mount the volume.
+- readOnly: Whether to mount the volume as read-only. Defaults to false.
+- mountPropagation: (I dont understand it but will write anyway) Specifies
 
 
 
