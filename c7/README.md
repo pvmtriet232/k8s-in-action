@@ -174,4 +174,4 @@ The question is where exactly the files are stored in volume?
 The files in an `emptyDir` volume are stored in a directory of the host node's filesystem.   
 This directory is mounted into the container at the desired location.  
 
-![Getting Started](.picture/pic1.png)
+![Getting Started](./picture/pic1.png)
