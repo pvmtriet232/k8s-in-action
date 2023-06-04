@@ -168,3 +168,8 @@ $ k exec -it quiz -c mongo -- mongo admin --eval "db.shutdownserver()"
 ```bash
 $ k exec -it quiz -c mongo -- mongo kiada --quiet --eval "db.questions.count()"
 ```
+The result should be "1" so that the data has survived the container restart.  
+The question is where exactly the files are stored in volume?
+### Understanding where the file in an emptyDir are stored
+The files in an `emptyDir` volume are stored in a directory of the host node's filesystem.   
+This directory is mounted into the container at the desired location.  
