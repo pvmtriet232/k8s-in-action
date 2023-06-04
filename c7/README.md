@@ -173,3 +173,5 @@ The question is where exactly the files are stored in volume?
 ### Understanding where the file in an emptyDir are stored
 The files in an `emptyDir` volume are stored in a directory of the host node's filesystem.   
 This directory is mounted into the container at the desired location.  
+
+![Getting Started](.picture/pic1.png)
