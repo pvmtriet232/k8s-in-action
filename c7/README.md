@@ -175,3 +175,10 @@ The files in an `emptyDir` volume are stored in a directory of the host node's f
 This directory is mounted into the container at the desired location.  
 
 ![Getting Started](./picture/pic1.png)
+
+the `pod_UID` is the unique ID of the pod, To see the directory, run this command to get `pod_UID`:
+```bash
+k get pod quiz -o json | jq .metadate.uid
+>> "4f49f452-2a9a-4f70-8df3-31a227d020a1"
+```
+
