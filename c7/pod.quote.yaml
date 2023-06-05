@@ -8,7 +8,7 @@ spec:
     emptyDir: {}
   containers:
   - name: quote-writer
-    image: luksa/quote-writer:0.1
+    image: ghcr.io/pvmtriet232/quote-writer:0.1
     imagePullPolicy: Always
     volumeMounts:
     - name: shared
