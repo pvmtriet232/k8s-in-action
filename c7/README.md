@@ -323,8 +323,41 @@ Because you can't use the same manifest without modification to deploy the pod i
 ## 7.3.3 Understanding how external volumes are mounted
 ...
 ## 7.4 Accessing files on the worker node's filesystem
+Most pods shouldn't care which host node they are running on, and they shouldn't access any files on the node's filesystem.  
+System-level pods are the exeption. They may need to read the node's files or use the node's filesystem to access the node's devices ...   
 
+K8s makes this possible through the `hostPath` volume type.
+### Introducing the hostPath volume
+A `hostPath` volume points to a specific file or directory in the filesystems of the host node, ad shown in the next figure.  
+Pods running on the same node and using the same path in their `hostPath` volume have access to the same files, whereas pods on other nodes do not.   
+The most dangerous volume types in k8s and is usually reserved for use in privileged pods only.
+## 7.4.2 Using a HostPath volume to explore the entire filesystem of the host node within the pod
+```bash
+volumes:
+- name: host-root
+  hostPath:
+    path: /
+    ...
+```
+Apply the pod.node-explorer.yaml  
 
+```bash
+$ k exec -it node-explorer -- sh
 
+$ cd /host
+```
+Now you inside the root directory of the node's filesystem of a random node in your cluster 
+if you'd like to deploy the pod on the specific node, edit `node-explorer.specific-node.pod.yaml` , set `.spec.nodeName` field to the name of the node you choose.
+### Specifying the type for `hostPath` volume
+| Type   |      Description      | 
+|:----------|:-------------:|
+| `Directory` | K8s checks if a dir exists at the specified path. You use this type if you want to mount a pre-existing dir into the pod and want to prevent the pod from running if the directory doesn't exist |
+| `DirectoryOrCreate` |   Same as `Directory`, but if nothing exists at the specified path, an empty directory is created    |  
+| `File` | The specified path must be a file. | 
+| `FileOrCreate` | ... |
+| `BlockDevice` | The Specified path must be a block device. |
+| `CharDevice` | ... |
+| `Socket` | The Specified path must be a UNIX socket. |
+If the specified path doesn't match the type, the pod's containers don't run.
 
 
