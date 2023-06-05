@@ -200,4 +200,43 @@ To store sensitive data, because the data is not written to disk, there is less 
 Use `sizeLimit` field to configure the size of an `emptyDir` volume.  
 ## 7.2.2 Populating an emptyDir volume with data using an init container
 The 1st way to do it: run MongoDb container locally, insert data , commit the container state into a new image and use that image in your pod.  
-The better way: package data into a container image and copy the data files from the container to the volume when the container starts.
+The better way: package data into a container image and copy the data files from the container to the volume when the container starts by using `init container`
+- Build an image contain the insert-question.js script by busybox with command cp the file to the `/initdb.d` 
+- declare an init container with that image and with an `emptyDir` volume mount at `/initdb.d` to inject the question to the volume (the script is now located in `initdb` volume, and init container is completed)
+- mount the `initdb` volume to the mongo db at `/docker-entrypoint-initdb.d` directory so the container pick the script up and run it when starting. This inserts the questions into database in`/data/db` directory - mounted to `quiz-data` volume, so the data can now survive container restart.
+```bash
+apiVersion: v1
+kind: pod
+metadata:
+    name: quiz
+spec:
+    volumes:
+    - name: initdb
+      emptyDir: {}
+    - name: quiz-data
+      emptyDir: {}
+    initContainer:
+    - name: installer
+      image: luksa/quiz-initdb-script-installer:0.1
+      volumeMounts:
+      - name: initdb
+        mountPath: /initdb.d
+    containers:
+    - name: quiz-api
+      image: luksa/quiz-api:0.1
+      ports:
+      - name: http
+        containerPort: 8080
+    - name: mongo
+      image: mongo
+      volumeMounts:
+      - name: quiz-data
+        mountPath: /data/db
+      - name: initdb
+        mountPath: /docker-entrypoint-initdb.d/
+        readOnly: true
+```
+## 7.2.3 Sharing files between containers
+
+    
+
