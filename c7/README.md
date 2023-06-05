@@ -240,6 +240,52 @@ spec:
 To share file between container, a volume need to be mounted into both containers.  
 The processes will like this: [container quote-writer: shell-script] >> a new quote to the volume every 60s [READ-BY] [container nginx] serve via `http`
 ### Create a pod with two container and a shared volume
+```bash
+apiVersion: v1
+kind: pod
+metadata:
+    name: quote
+spec:
+    volumes:
+    - name: shared
+      emptyDir: {}
+    containers:
+    - name: nginx
+      image: alpine-nginx
+      volumeMounts:
+      - name: shared
+        mountPath: /usr/share/nginx/html
+        readOnly: true
+    - name: quote-writer
+      image: luksa/quote-writer:0.1
+      volumeMounts:
+      - name: shared
+        mountPath: /var/local/output
+      ports:
+      - name: http
+        containerPort:80
+```
+Container `quote-writer` write `quote` file to `/var/local/output`.  
+Container `nginx` serves files from `/usr/share/nginx/html` directory.  
+To verify that the quote has been written every 60s:
+```bash
+$ k port-forward quote 1080:80
+$ curl localhost:1080/quote
+```
+Or
+```bash
+$ k exec quote -c quote-writer --cat /var/local/output/quote
+// or
+$ k exec quote -c nginx -- cat /usr/share/nginx/html/quote
+```
+## 7.3 Using external storage in pods
+Why you need external storage?  
+An `emptyDir` volume is a dedicated directory created for and used exclusively by the pod in which the volume is defined.  
+When the pod is deleted, the volume and it's contents are deleted.  
+
+The other types of volumes don't create a new directory, but instead mount an existing external directory in the filesystem of container.  
+This kind of volume can be shared by multiple pods and can survive the instantiations of the pod.  
+
 
 
 
