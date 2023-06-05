@@ -178,7 +178,26 @@ This directory is mounted into the container at the desired location.
 
 the `pod_UID` is the unique ID of the pod, To see the directory, run this command to get `pod_UID`:
 ```bash
-$ k get pod quiz -o json | jq .metadate.uid
->> "4f49f452-2a9a-4f70-8df3-31a227d020a1"
+k get pod quiz -o json | jq .metadate.uid
+// "4f49f452-2a9a-4f70-8df3-31a227d020a1"
 ```
-
+To get the name of the node that runs the pod use:  
+```bash
+$ k get po quiz -o wide
+$ k get pod quiz -o json | jq .spec.nodeName
+``` 
+### Creating the emptyDir volume in memory
+```bash
+volumes:
+    - name: app-volume
+      emptyDir:
+        medium: Memory #A
+```
+#A This directory will be stored in memory
+Why you need `emptyDir` volume in memory?  
+To store sensitive data, because the data is not written to disk, there is less chance that the data will be compromised and persisted longer than desired. 
+### Specifying the size limit for the emptydir volume
+Use `sizeLimit` field to configure the size of an `emptyDir` volume.  
+## 7.2.2 Populating an emptyDir volume with data using an init container
+The 1st way to do it: run MongoDb container locally, insert data , commit the container state into a new image and use that image in your pod.  
+The better way: package data into a container image and copy the data files from the container to the volume when the container starts.
