@@ -287,6 +287,7 @@ The other types of volumes don't create a new directory, but instead mount an ex
 This kind of volume can be shared by multiple pods and can survive the instantiations of the pod.  
 
 ### Use an AWS Elastic BLock Store volume
+If you run your cluster on AWS EC2, use can use `awsElasticBlockStore` volume, If You use azure, you can use `azurefile` or `azuredisk`
 ```bash
 spec:
     volumes:
@@ -297,6 +298,32 @@ spec:
     containers:
     - ...
 ```
+### Use an NFS volume
+If your cluster runs on your own server, you can use NFS share by specifying the NFS server address and the exported path 
+```bash
+spec:
+    volumes:
+    - name: quiz-data
+      nfs: # This volume refers to an NFS share.
+        server: 1.2.3.4 # IP address of the NFS server
+        path: /some/path # File path exported by the server
+```
+### Using other storage technologies
+Other supported options are `iscsi`,`glusterfs`, `rbd` ,`flexVolume`, `cinder` ...   
+To learn more:
+```bash
+$ k explain pod.spec.volumes
+```
+for detail:
+```bash
+$ k explain pod.spec.volumes.iscsi
+```
+### Why does k8s force software developers to understand low-level storage?
+Because you can't use the same manifest without modification to deploy the pod in another cluster.  
+## 7.3.3 Understanding how external volumes are mounted
+...
+## 7.4 Accessing files on the worker node's filesystem
+
 
 
 
