@@ -357,7 +357,8 @@ if you'd like to deploy the pod on the specific node, edit `node-explorer.specif
 | `FileOrCreate` | ... |
 | `BlockDevice` | The Specified path must be a block device. |
 | `CharDevice` | ... |
-| `Socket` | The Specified path must be a UNIX socket. |
+| `Socket` | The Specified path must be a UNIX socket. | . 
+
 If the specified path doesn't match the type, the pod's containers don't run.
 
 
