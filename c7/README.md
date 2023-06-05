@@ -286,6 +286,18 @@ When the pod is deleted, the volume and it's contents are deleted.
 The other types of volumes don't create a new directory, but instead mount an existing external directory in the filesystem of container.  
 This kind of volume can be shared by multiple pods and can survive the instantiations of the pod.  
 
+### Use an AWS Elastic BLock Store volume
+```bash
+spec:
+    volumes:
+    - name: quiz-data
+      awsElasticBlockStore: # The volume refers to an awsElasticBlockStore
+        volumeID: quiz-data #The Id of the EBS volume
+        fsType: ext4 #file system type
+    containers:
+    - ...
+```
+
 
 
 
