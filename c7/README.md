@@ -237,6 +237,9 @@ spec:
         readOnly: true
 ```
 ## 7.2.3 Sharing files between containers
+To share file between container, a volume need to be mounted into both containers.  
+The processes will like this: [container quote-writer: shell-script] >> a new quote to the volume every 60s [READ-BY] [container nginx] serve via `http`
+### Create a pod with two container and a shared volume
 
-    
+
 
