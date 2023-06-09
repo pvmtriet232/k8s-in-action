@@ -33,4 +33,13 @@ Works like this:
 - Cluster administrator sets up (`PersistentVolume` points to the `NFS File Share`) 
 - User create (`PersistentVolumeClaim` that represents the application's request for storage), then user create a pod that refer to `PersistenVolumeClaim`, when the pod run the Network storage volume(`NFS File Share`) is mounted into the pod's containers
 - Instead of the developer adding a technology-specific volume to their pod, the cluster administrator sets up the underlying storage and then registers it in Kubernetes by creating a `PersistentVolume` object through Kubernetes API
-- When a cluster user needs persistent storage in one of their pods, they first create a `PersistentVolumeClaim` object in which they either refer to a specific persistent volume by name, or specify the minimum volume size and access mode required by the application, and K8s find a `PersistentVolume` that meets these requirements. 
+- When a cluster user needs persistent storage in one of their pods, they first create a `PersistentVolumeClaim` object in which they either refer to a specific persistent volume by name, or specify the minimum volume size and access mode required by the application, and K8s find a `PersistentVolume` that meets these requirements. In both cases, the persistent volume is then bound to the claim and is given exclusive access. The claim can then be referenced in a volume definition within one or more pods. when the pod runs, the storage volume configured in the PersistentVolume object is attached to the worker node and mounted into the pod's containers.
+## 8.2 Creating persistent volumes and claims
+Let's revisit the quiz pod from the previous chapter. You may remember that this pod contains a `eksElasticBlockStore` volume. You'll modify that pod's manifest to make it use the `eksElasticBlockStore` via `PersistentVolume` object.  
+
+There are usually two different types of Kubernetes users involved in the provisioning and use of persistent volumes. you will take both in the next exercises:
+- Cluster administrator: create some persistent volumes, one of them will point to the existing `eksElasticBLockStore`. 
+- Developer, user: create a `PersistentVolumeClaim` to get ownership of that volume and use it in the quiz pod.
+### 8.2.1 Creating a PersistentVolume object
+
+
