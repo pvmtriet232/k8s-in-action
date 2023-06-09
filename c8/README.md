@@ -22,4 +22,4 @@ In this Chapter You'll learn:
 ### What is Persistent volume claims
 - A `PersistenVolumeClaim` object represents a user's claim on the persistent volume. Because its lifecycle is not tied to that of the pod, it allows the ownership of persistent volume to be decoupled from the pod. Before a user can use a persistent volume in their pods, they must create a `PersistentVolumeClaim` object. They can delete the pod at any time, and they won't lose ownership of the persistent volume.
 ### Using a persistent volume claim in a pod
-- 
+- To use the persistent volume in a pod
