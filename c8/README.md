@@ -40,6 +40,48 @@ Let's revisit the quiz pod from the previous chapter. You may remember that this
 There are usually two different types of Kubernetes users involved in the provisioning and use of persistent volumes. you will take both in the next exercises:
 - Cluster administrator: create some persistent volumes, one of them will point to the existing `eksElasticBLockStore`. 
 - Developer, user: create a `PersistentVolumeClaim` to get ownership of that volume and use it in the quiz pod.
-### 8.2.1 Creating a PersistentVolume object
+## 8.2.1 Creating a PersistentVolume object
+- If you use Google Kubernetes Engine to run these examples, you'll create persistent volumes that point to GCE Persistent Disks (GCE PD).
+- If use other cloud provider, consult the provider's documentation to learn how to create the physical volume in their environment.
+- If use Minikube, Kind, or other type of cluster, you don't need to create volumes because you'll use a persistent volumes that refers to a local directory on the worker node.
+### Creating a persistent volume with GCE Persistent disk as the underlying storage
+- In Google cloud, you can create GCE Persistent Disk name `quiz-data` by using this command:
+```bash
+$ gcloud compute disks create quiz-data
+```
+- After the disk is created, you then create a manifest file for the `PersistentVolume` object, here is the syntax:  
 
+#### ** `pv.quiz-data.gcepd.yaml` **
+```bash
+apiVersion: v1
+kind: PersistentVolume 
+metadata:
+  name: quiz-data # The name of this persistent volume
+spec:
+  capacity: # The storage capacity of this volume
+    storage: 1Gi
+  accessModes: # Whether a single node or many nodes can access this volume in read/write or read-only mode.
+  - ReadWriteOnce
+  - ReadOnlyMany
+  gcePersistentDisk: # This persistent volume uses the GCE Persistent Disk created in the previous chapter
+    pdName: quiz-data
+    fsType: ext4
 
+```
+### Creating persistent volumes backed by other storage technologies
+- If your Kubernetes cluster runs on a different cloud provider, You should be able to easily change the persistent volume manifest to use something other than a GCE Persistent Disk.
+- If you used Minikube or Kind to provision your cluster, you can create a persistent volume that uses a local Directory on the worker node instead of network storage using `hostPath` field in the `PersistentVolume` manifest. The manifest for the `quiz-data` look like this:  
+```bash
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: quiz-data
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  - ReadOnlyMany
+  hostPath: 
+    path: /var/quiz-data
+```
