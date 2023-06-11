@@ -82,6 +82,12 @@ spec:
   accessModes:
   - ReadWriteOnce
   - ReadOnlyMany
-  hostPath: 
+  hostPath: # Instead of a GCE Persistent Disk, this persistent volume refers to a local directory on the host node 
     path: /var/quiz-data
 ```
+### Specifying the volume capacity
+- The `capacity` of the volume indicates the size of the underlying volume. Each persistent volume must specify its capacity so that Kubernetes can determine whether a particular persistent volume can meet the requirements specified in the persistent volume claim before it can bind them.
+### Specifying volume access modes
+- Each persistent volume must specify a list of `accessModes` it supports. Depending on the underlying technology, a persistent volume may or may not be mounted by multiple worker nodes simultaneously in read/write or read-only mode.
+- Kubernetes inspects the persistent volume's access modes to determine if it meets the requirements of the claim
+- test
