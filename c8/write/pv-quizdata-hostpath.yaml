@@ -9,5 +9,5 @@ spec:
     - ReadWriteOnce
     - ReadOnlyMany
   hostPath:
-    path: var/quiz-data
+    path: /var/quiz-data
 
