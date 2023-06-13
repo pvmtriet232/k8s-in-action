@@ -14,5 +14,5 @@ spec:
     - hard
     - nfsvers=4.1
   nfs:
-    path: /var/other-data
+    path: /tmp
     server: 172.17.0.2
