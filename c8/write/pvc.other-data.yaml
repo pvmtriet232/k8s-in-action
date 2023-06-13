@@ -5,10 +5,9 @@ metadata:
 spec:
   resources:
     requests:
-      storage: 5Gi
+      storage: 4Gi
   accessModes:
   - ReadWriteOnce
   - ReadOnlyMany
-  storageClassName: nfs
-
-
+  storageClassName: ""
+  volumeName: other-data
