@@ -6,7 +6,7 @@ spec:
   volumes:
   - name: quiz-data
     persistentVolumeClaim:
-      claimName: quiz-data
+      claimName: quiz-data-default
   containers:
   - name: quiz-api
     image: luksa/quiz-api:0.1
