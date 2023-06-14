@@ -12,7 +12,7 @@ spec:
     path: /mnt/ssd1
   nodeAffinity:
     required:
-      nodeSelecterTerms:
+      nodeSelectorTerms:
       - matchExpressions:
         - key: kubernetes.io/hostname
           operator: In
