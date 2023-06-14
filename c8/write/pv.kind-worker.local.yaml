@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-ssh-on-kind-worker
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: local
+  capacity:
+    storage: 10Gi
+  local:
+    path: /mnt/ssd1
+  nodeAffinity:
+    required:
+      nodeSelecterTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - kind-worker
