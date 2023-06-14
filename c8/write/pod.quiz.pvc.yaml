@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: quiz-app
+  name: quiz
 spec:
   volumes:
   - name: quiz-data
