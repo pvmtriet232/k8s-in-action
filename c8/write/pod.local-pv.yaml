@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongodb-local
+spec:
+  volumes:
+  - name: mongodb-data
+    persistentVolumeClaim:
+      claimName: quiz-data-local
+  containers:
+  - image: mongo
+    name: mongodb
+    volumeMounts:
+    - name: mongodb-data
+      mountPath: /data/db
