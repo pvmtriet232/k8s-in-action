@@ -6,3 +6,6 @@ This chapter covers:
 - Storing sensitive information in secrets
 - Using the Downward API to expose pod metadata to the application
 - Using configMap, secret, downwardAPI and projected volumes
+## 9.1 Setting the command, arguments, and environment variables
+like regular applications, containerrized applications can be configured using command-line arguments, environment variables, and files.  
+
